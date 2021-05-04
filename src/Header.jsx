@@ -6,10 +6,6 @@ import Button from '@material-ui/core/Button';
 import Logo from './logo'
 
 export default function Header({ goToPage }) {
-    const handlePage = (page) => {
-        goToPage(page)
-    }
-
   return (
     <div >
       <AppBar position="static">
@@ -18,9 +14,9 @@ export default function Header({ goToPage }) {
             <Logo />
           </Typography>
           <div>
-            <Button color="inherit" onClick = {()=>handlePage('map')} > Карта </Button>
-            <Button color="inherit" onClick = {()=>handlePage('profile')}> Профиль </Button>
-            <Button color="inherit" onClick = {()=>handlePage('registration')}> Войти </Button>
+            <Button color="inherit" onClick = {()=>goToPage('map')} > Карта </Button>
+            <Button color="inherit" onClick = {()=>goToPage('profile')}> Профиль </Button>
+            <Button color="inherit" onClick = {()=>goToPage('registration')}> Войти </Button>
           </div>
         </Toolbar>
       </AppBar>

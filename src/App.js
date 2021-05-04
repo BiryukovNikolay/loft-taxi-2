@@ -8,22 +8,18 @@ import Registration from './Registration.jsx';
 
 const getPage = (page, callback) => {
 
-  if (page === 'map') {
-    return <Map />;
-  }
-
-  if (page === 'profile') {
-    return <Profile />
-  }
-
-  if (page === 'login') {
-    return <Login onSubmit={callback}/>
-  }
-
-  if (page === 'registration') {
-    return <Registration onSubmit={callback}/>
-  }
-
+  switch (page) {
+    case 'map':
+      return <Map />;
+    case 'profile':
+      return <Profile />
+    case 'login':
+      return <Login onSubmit={callback}/>;
+    case 'registration':
+      return <Registration onSubmit={callback}/>
+    default:
+      return <Map />;
+    }
 }
 
 class App extends React.Component {  

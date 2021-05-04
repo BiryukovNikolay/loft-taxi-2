@@ -14,9 +14,8 @@ const submitHandle = (evt, page) => {
       <div className="login-form">
         <form noValidate autoComplete="off" onSubmit={(evt)=>submitHandle(evt, 'map')}>
             <TextField id="email" label="Email*" />
-            <TextField id="name" label="Как вас зовут" />
-            <TextField id="password" label="Придумайте пароль" />
-            <Button className="main-btn" type="submit" variant="contained" color="primary">Зарегестрироваться</Button>
+            <TextField id="password" label="Введите пароль" />
+            <Button className="main-btn" type="submit" variant="contained" color="primary">Войти</Button>
         </form>
     </div>
   );
