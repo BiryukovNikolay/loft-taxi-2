@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.header {
+  background-color: black;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-form {
+  width: 40%;
+  margin: 30px auto;
+}
+
+.login-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form .main-btn {
+  margin-top: 20px;
+  background-color: #FDBF5A;
+  border-radius: 100px;
+}
+
+
