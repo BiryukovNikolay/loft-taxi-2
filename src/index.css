@@ -35,4 +35,17 @@ code {
   border-radius: 100px;
 }
 
+.map-wrapper {
+  position: relative;
+  width: 100%;
 
+}
+
+.map {
+  position: absolute;
+  height: 300px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
