@@ -3,7 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Logo from './logo'
+import Logo from './Logo'
 
 export default function Header({ goToPage }) {
   return (
@@ -16,7 +16,7 @@ export default function Header({ goToPage }) {
           <div>
             <Button color="inherit" onClick = {()=>goToPage('map')} > Карта </Button>
             <Button color="inherit" onClick = {()=>goToPage('profile')}> Профиль </Button>
-            <Button color="inherit" onClick = {()=>goToPage('registration')}> Войти </Button>
+            <Button color="inherit" onClick = {()=>goToPage('start')}> Выйти </Button>
           </div>
         </Toolbar>
       </AppBar>
