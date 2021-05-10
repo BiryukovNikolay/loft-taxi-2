@@ -5,6 +5,7 @@ import Map from './pages/Map.jsx';
 import Profile from './pages/Profile.jsx';
 import Start from './pages/Start';
 import { widthAuth } from './context/AuthContext';
+import PropTypes from "prop-types";
 
 const PAGES = {
   'map': (props) => <Map {...props}/>,
@@ -17,7 +18,6 @@ class App extends React.Component {
   state = { page: 'start'}
 
   goToPage = (page) => {
-    console.log(this.props.isLoggedIn);
     if (!this.props.isLoggedIn) {
       return
     }
@@ -33,3 +33,7 @@ class App extends React.Component {
 }
 
 export default widthAuth(App);
+
+Start.propTypes = {
+  isLoggedIn: PropTypes.bool
+}

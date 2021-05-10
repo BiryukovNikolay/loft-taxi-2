@@ -3,6 +3,7 @@ import React from 'react';
 import StartLogo from '../components/Startlogo';
 import { widthAuth } from '../context/AuthContext';
 import StartForm from '../components/StartForm';
+import PropTypes from "prop-types";
 
 const startPageData = {
   registration: {
@@ -48,4 +49,8 @@ class Start extends React.Component {
 }
   
   
-  export default widthAuth(Start);
+export default widthAuth(Start);
+
+Start.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+}

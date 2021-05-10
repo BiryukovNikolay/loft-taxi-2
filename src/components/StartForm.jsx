@@ -3,11 +3,9 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { widthAuth } from '../context/AuthContext';
-//({onSubmit, formData, onChangeClick}) 
+import PropTypes from "prop-types";
 
 class StartForm extends React.Component {
-
-
 
 submitHandle(evt, page) { 
     evt.preventDefault()
@@ -38,3 +36,18 @@ render() {
 }
 
 export default widthAuth(StartForm);
+
+StartForm.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    onChangeClick: PropTypes.func.isRequired,
+    logIn: PropTypes.func,
+    formData: PropTypes.shape({
+        nameField: PropTypes.bool.isRequired,
+        buttonText: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        footerText: PropTypes.string.isRequired,
+        footerLink: PropTypes.string.isRequired,
+        passwordLabel: PropTypes.string.isRequired,
+        changePopup: PropTypes.string.isRequired,
+    })
+}
