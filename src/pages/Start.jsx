@@ -45,7 +45,7 @@ class Start extends React.Component {
           </section>
         </div>
     };
-  }
+}
   
   
   export default widthAuth(Start);

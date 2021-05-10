@@ -17,8 +17,8 @@ class App extends React.Component {
   state = { page: 'start'}
 
   goToPage = (page) => {
-    if (this.props.isLoggedIn) {
-      this.setState({ page })
+    console.log(this.props.isLoggedIn);
+    if (!this.props.isLoggedIn) {
       return
     }
     this.setState({ page })
