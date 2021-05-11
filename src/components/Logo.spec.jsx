@@ -1,8 +1,8 @@
 import React from 'react';
-import Startlogo from './Startlogo';
+import Logo from './Logo';
 import renderer from 'react-test-renderer';
 
 it('renders correctly', () => {
-    const tree = renderer.create(<Startlogo />).toJSON();
+    const tree = renderer.create(<Logo />).toJSON();
     expect(tree).toMatchSnapshot()
 })
