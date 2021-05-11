@@ -2,9 +2,9 @@ import React from 'react';
 import { Header } from './Header';
 import {render, fireEvent} from '@testing-library/react';
 
-jest.mock('./Map', () => ({Map: () => <div>Map Page</div>}));
-jest.mock('./Profile', () => ({Profile: () => <div>Profile Page</div>}));
-jest.mock('./Start', () => ({Profile: () => <div>Start Page</div>}));
+jest.mock('../pages/Map', () => ({Map: () => <div>Map Page</div>}));
+jest.mock('../pages/Profile', () => ({Profile: () => <div>Profile Page</div>}));
+jest.mock('../pages/Start', () => ({Profile: () => <div>Start Page</div>}));
 
 describe('Header', () => {
     it('renders correctly', () => {

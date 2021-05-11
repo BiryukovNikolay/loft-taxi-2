@@ -83,6 +83,7 @@ exports[`renders correctly 1`] = `
     >
       <h2
         className="start-form-title"
+        data-testid="form-title"
       >
         Войти
       </h2>
@@ -156,6 +157,7 @@ exports[`renders correctly 1`] = `
         </div>
         <button
           className="forget-button"
+          data-testid="form-name-input"
         >
           Забыли пароль?
         </button>
@@ -189,6 +191,7 @@ exports[`renders correctly 1`] = `
            
           <span
             className="footer-link"
+            data-testid="form-change-button"
             onClick={[Function]}
           >
             Регистрация

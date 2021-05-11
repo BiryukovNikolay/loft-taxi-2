@@ -17,18 +17,18 @@ submitHandle(evt, page) {
 render() {
     const {nameField, buttonText, title, footerText, footerLink, passwordLabel, changePopup} = this.props.formData;
     const nameInput = nameField ? <TextField id="name" name="name" label="Как вас зовут" /> : '';
-    const forgetPasswortLink = !nameField ? <button className="forget-button">Забыли пароль?</button> : '';
+    const forgetPasswortLink = !nameField ? <button data-testid='form-name-input' className="forget-button">Забыли пароль?</button> : '';
 
     return (
         <div className="start-form">
-          <h2 className="start-form-title">{title}</h2>
+          <h2 className="start-form-title" data-testid='form-title'>{title}</h2>
           <form noValidate autoComplete="off" onSubmit={(evt)=> this.submitHandle(evt, 'map')}>
               <TextField id="email" name="email" label="Email*" />
               {nameInput}
               <TextField id="password" type="password" name="password" label={passwordLabel} />
               {forgetPasswortLink}
               <Button className="main-btn" type="submit" variant="contained" color="primary">{buttonText}</Button>
-          <p className="footer-text">{footerText} <span className="footer-link" onClick={()=> this.props.onChangeClick(changePopup)}>{footerLink}</span></p>
+          <p className="footer-text">{footerText} <span data-testid='form-change-button' className="footer-link" onClick={()=> this.props.onChangeClick(changePopup)}>{footerLink}</span></p>
           </form>
       </div>
     );
