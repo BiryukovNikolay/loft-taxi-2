@@ -18,16 +18,25 @@ class App extends React.Component {
   state = { page: 'start'}
 
   goToPage = (page) => {
+    console.log('App', this.props.isLoggedIn);
+
     if (!this.props.isLoggedIn) {
+      this.setState( {page: 'start'} );
       return
     }
-    this.setState({ page })
+
+    if (!page) {
+      this.setState( {page: 'map'} );
+      return
+    }
+
+    this.setState({ page });
   };
 
   render() {
     return <div className="App">
       {this.state.page !== 'start' && <Header goToPage={this.goToPage} />}
-      {PAGES[this.state.page]({onSubmit: this.goToPage})}
+      {this.state.page === 'start' ? PAGES[this.state.page]({onSubmit: this.goToPage}) : PAGES[this.state.page]()}
     </div>
   };
 }

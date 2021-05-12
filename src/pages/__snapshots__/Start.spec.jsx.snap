@@ -89,6 +89,7 @@ exports[`renders correctly 1`] = `
       </h2>
       <form
         autoComplete="off"
+        data-testid="start-form"
         noValidate={true}
         onSubmit={[Function]}
       >
@@ -163,6 +164,7 @@ exports[`renders correctly 1`] = `
         </button>
         <button
           className="MuiButtonBase-root MuiButton-root MuiButton-contained main-btn MuiButton-containedPrimary"
+          data-testid="form-submit"
           disabled={false}
           onBlur={[Function]}
           onDragLeave={[Function]}
@@ -184,20 +186,19 @@ exports[`renders correctly 1`] = `
             Войти
           </span>
         </button>
-        <p
-          className="footer-text"
-        >
-          Новый пользователь?
-           
-          <span
-            className="footer-link"
-            data-testid="form-change-button"
-            onClick={[Function]}
-          >
-            Регистрация
-          </span>
-        </p>
       </form>
+      <p
+        className="footer-text"
+      >
+        Новый пользователь?
+        <span
+          className="footer-link"
+          data-testid="form-change-button"
+          onClick={[Function]}
+        >
+          Регистрация
+        </span>
+      </p>
     </div>
   </section>
 </div>

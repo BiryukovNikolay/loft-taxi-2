@@ -1,18 +1,26 @@
 import React from 'react';
-import { StartForm } from './StartForm';
+import StartForm from './StartForm';
 import { render, fireEvent } from '@testing-library/react';
 
 describe('StartForm', () => {
+    const mockFunc = jest.fn()
+
     it('changes form after click', () => {
         
-        const { getByTestId } = render(<StartForm/>)
+        const { getByTestId, queryByTestId } = render(<StartForm onSubmit={mockFunc} logIn={mockFunc}/>)
+     
+     //   fireEvent.submit(getByTestId('start-form'));
+     //   expect(mockFunc).toHaveBeenCalledWith('', '');
 
+        expect(getByTestId('form-title').textContent).toBe('Войти');
+        expect(queryByTestId('form-name-input')).toBeTruthy();
+        
         fireEvent.click(getByTestId('form-change-button'));
         expect(getByTestId('form-title').textContent).toBe('Регистрация');
-        expect(getByTestId('form-name-input')).toBeTruthy();
-
+        expect(queryByTestId('form-name-input')).toBeNull();
+        
         fireEvent.click(getByTestId('form-change-button'));
         expect(getByTestId('form-title').textContent).toBe('Войти');
-        expect(getByTestId('form-name-input')).toBeFalsy();
+        expect(queryByTestId('form-name-input')).toBeTruthy();
     });
 });

@@ -1,27 +1,31 @@
 import React from 'react';
-import { Header } from './Header';
+import Header from './Header';
 import {render, fireEvent} from '@testing-library/react';
+import renderer from 'react-test-renderer';
 
-jest.mock('../pages/Map', () => ({Map: () => <div>Map Page</div>}));
-jest.mock('../pages/Profile', () => ({Profile: () => <div>Profile Page</div>}));
-jest.mock('../pages/Start', () => ({Profile: () => <div>Start Page</div>}));
+const mockFuncGoToPage = jest.fn();
+const mockFuncLogOut = jest.fn();
 
 describe('Header', () => {
     it('renders correctly', () => {
-        const {container} = render(<Header />)
-        expect(container.innerHTML).toMatch('Home component')
-    }) 
+        const tree = renderer.create(<Header />).toJSON();
+        expect(tree).toMatchSnapshot()
+    })
 
     describe('when click on nav buttons', () => {
         it('open the corresponding page', () => {
-            const { getByText, container } = render(<Header />)
+
+            const { getByText } = render(<Header goToPage={mockFuncGoToPage} logOut={mockFuncLogOut} />)
 
             fireEvent.click(getByText('Карта'))
-            expect(container.innerHTML).toMatch('Map Page')
+            expect(mockFuncGoToPage).toHaveBeenCalledWith('map');
             fireEvent.click(getByText('Профиль'))
-            expect(container.innerHTML).toMatch('Profile Page')
+            expect(mockFuncGoToPage).toHaveBeenCalledWith('profile');
+    
             fireEvent.click(getByText('Выйти'))
-            expect(container.innerHTML).toMatch('Start Page')
+            expect(mockFuncLogOut).toHaveBeenCalledTimes(1);
+            expect(mockFuncGoToPage).toHaveBeenCalledWith('start');
+            ;
         })
     })
 })
