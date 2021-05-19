@@ -1,43 +1,48 @@
-import './App.css';
+import './style/App.css';
 import React from 'react';
-import Header from './Header.jsx';
-import Map from './Map.jsx';
-import Profile from './Profile.jsx';
-import Login from './Login.jsx';
-import Registration from './Registration.jsx';
+import Header from './components/Header.jsx';
+import Map from './pages/Map.jsx';
+import Profile from './pages/Profile.jsx';
+import Start from './pages/Start';
+import { widthAuth } from './context/AuthContext';
+import PropTypes from "prop-types";
 
-const getPage = (page, callback) => {
-
-  switch (page) {
-    case 'map':
-      return <Map />;
-    case 'profile':
-      return <Profile />
-    case 'login':
-      return <Login onSubmit={callback}/>;
-    case 'registration':
-      return <Registration onSubmit={callback}/>
-    default:
-      return <Map />;
-    }
+const PAGES = {
+  'map': (props) => <Map {...props}/>,
+  'profile': (props) => <Profile {...props} />,
+  'start': (props) => <Start {...props} />,
 }
 
 class App extends React.Component {  
 
-  state = { page: 'login'}
+  state = { page: 'start'}
 
   goToPage = (page) => {
-    this.setState({ page })
+    console.log('App', this.props.isLoggedIn);
+
+    if (!this.props.isLoggedIn) {
+      this.setState( {page: 'start'} );
+      return
+    }
+
+    if (!page) {
+      this.setState( {page: 'map'} );
+      return
+    }
+
+    this.setState({ page });
   };
 
   render() {
     return <div className="App">
-      <Header goToPage={this.goToPage} />
- 
-      {getPage(this.state.page, this.goToPage)}
+      {this.state.page !== 'start' && <Header goToPage={this.goToPage} />}
+      {this.state.page === 'start' ? PAGES[this.state.page]({onSubmit: this.goToPage}) : PAGES[this.state.page]()}
     </div>
   };
 }
 
+export default widthAuth(App);
 
-export default App;
+Start.propTypes = {
+  isLoggedIn: PropTypes.bool
+}
