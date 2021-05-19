@@ -2,8 +2,9 @@ import '../style/StartForm.css';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { widthAuth } from '../context/AuthContext';
 import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import { logIn } from '../actions';
 
 const startPageData = {
     registration: {
@@ -73,7 +74,10 @@ class StartForm extends React.Component {
     }
 }
 
-export default widthAuth(StartForm);
+export default connect(
+    (state) => ({isLoggedIn: state.auth.isLoggedIn}),
+    { logIn }
+  )(StartForm);
 
 StartForm.propTypes = {
 

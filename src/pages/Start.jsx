@@ -1,9 +1,10 @@
 import '../style/Start.css';
 import React from 'react';
 import StartLogo from '../components/Startlogo';
-import { widthAuth } from '../context/AuthContext';
 import StartForm from '../components/StartForm';
 import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import { logIn } from '../actions';
 
 class Start extends React.Component {  
     render() {
@@ -19,7 +20,10 @@ class Start extends React.Component {
     };
 }
 
-export default widthAuth(Start);
+export default connect(
+  (state) => ({isLoggedIn: state.auth.isLoggedIn}),
+  { logIn }
+)(Start);
 
 Start.propTypes = {
   onSubmit: PropTypes.func.isRequired

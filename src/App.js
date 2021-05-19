@@ -4,7 +4,7 @@ import Header from './components/Header.jsx';
 import Map from './pages/Map.jsx';
 import Profile from './pages/Profile.jsx';
 import Start from './pages/Start';
-import { widthAuth } from './context/AuthContext';
+import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 
 const PAGES = {
@@ -41,7 +41,9 @@ class App extends React.Component {
   };
 }
 
-export default widthAuth(App);
+export default connect(
+  state => ({isLoggedIn: state.auth.isLoggedIn})
+)(App);
 
 Start.propTypes = {
   isLoggedIn: PropTypes.bool
