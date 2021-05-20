@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
-import { logIn } from '../actions';
+import { authenticate } from '../actions';
 
 const startPageData = {
     registration: {
@@ -39,8 +39,8 @@ class StartForm extends React.Component {
     submitHandle(evt, callback) { 
         evt.preventDefault()
         const {email, password, name} = evt.target;
-        this.props.logIn(email.value, password.value, name.value);
-        this.props.onSubmit();
+        this.props.authenticate(email.value, password.value, name.value);
+        // this.props.onSubmit();
     }
 
     render() {
@@ -76,10 +76,9 @@ class StartForm extends React.Component {
 
 export default connect(
     (state) => ({isLoggedIn: state.auth.isLoggedIn}),
-    { logIn }
+    { authenticate }
   )(StartForm);
 
 StartForm.propTypes = {
-
     logIn: PropTypes.func,
 }

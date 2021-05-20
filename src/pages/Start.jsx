@@ -4,7 +4,7 @@ import StartLogo from '../components/Startlogo';
 import StartForm from '../components/StartForm';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
-import { logIn } from '../actions';
+import { authenticate } from '../actions';
 
 class Start extends React.Component {  
     render() {
@@ -22,9 +22,9 @@ class Start extends React.Component {
 
 export default connect(
   (state) => ({isLoggedIn: state.auth.isLoggedIn}),
-  { logIn }
+  { authenticate }
 )(Start);
 
 Start.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  //onSubmit: PropTypes.func.isRequired
 }

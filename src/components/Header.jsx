@@ -3,9 +3,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { logOut } from '../actions';
 import Logo from './Logo';
-import PropTypes from "prop-types";
 import { widthAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
+import { store } from '../store';
 
 class Header extends React.Component {
 
@@ -23,20 +25,15 @@ class Header extends React.Component {
               <Logo />
             </Typography>
             <div>
-              <Button color="inherit" onClick = {()=> this.props.goToPage('map')} > Карта </Button>
-              <Button color="inherit" onClick = {()=> this.props.goToPage('profile')}> Профиль </Button>
-              <Button color="inherit" onClick = {this.headerLogout}> Выйти </Button>
+              <Button><Link to="/map">Карта</Link></Button>
+              <Button><Link to="/profile">Профиль</Link></Button>
+              <Button><Link onClick={() => store.dispatch(logOut())} to="/start">Выйти</Link></Button>
             </div>
           </Toolbar>
         </AppBar>
       </div>
     );
   }
-}
-
-Header.propTypes = {
-  goToPage: PropTypes.func.isRequired,
-  logOut: PropTypes.func,
 }
 
 export default widthAuth(Header);

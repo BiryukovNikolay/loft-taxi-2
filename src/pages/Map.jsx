@@ -1,5 +1,6 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
+import Header from '../components/Header';
 
 export default class Map extends React.Component {
     map = null;
@@ -21,8 +22,10 @@ export default class Map extends React.Component {
     }
   
     render() {
-      return <div className="map-wrapper">
+      return <>
+      <Header goToPage={this.goToPage} />
+      <div className="map-wrapper">
                 <div data-testid="map" className="map" ref={this.mapContainer} />
-            </div>;
+            </div></>;
     }
 }

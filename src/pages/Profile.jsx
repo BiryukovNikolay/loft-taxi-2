@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 import { logOut } from '../actions';
+import Header from '../components/Header';
 
-const Profile = () => (<div>Profile page</div>)
+const Profile = () => (<><Header />
+<div>Profile page</div></>)
 
 export default connect(
     null,
