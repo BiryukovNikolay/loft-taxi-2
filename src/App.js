@@ -5,17 +5,18 @@ import Profile from './pages/Profile.jsx';
 import Start from './pages/Start';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { PrivateRoute } from './PrivateRoute';
+import { StartRoute } from './StartRoute';
 
 class App extends React.Component {  
 
   render() {
     return <div className="App">
-      {this.props.isLoggedIn ?  <Profile /> :  <Start />}
       <Switch>
-        <Route exact path='/' component={Start}/>
-        <Route path='/map' component={Map}/>
-        <Route path='/profile' component={Profile}/>
+        <StartRoute exact path='/' component={Map} startComponent={Start}/>
+        <PrivateRoute path='/map' component={Map}/>
+        <PrivateRoute path='/profile' component={Profile}/>
       </Switch>
     </div>
   };
