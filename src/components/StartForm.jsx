@@ -52,6 +52,7 @@ class StartForm extends React.Component {
         return (
             <div className="start-form">
             <h2 className="start-form-title" data-testid='form-title'>{title}</h2>
+               {this.props.error && <span className="error-form">{this.props.error}</span>}
             <form data-testid='start-form' noValidate autoComplete="off" onSubmit={(evt)=> this.submitHandle(evt)}>
                 <TextField id="email" name="email" label="Email*" />
                 {nameInput}
@@ -75,7 +76,7 @@ class StartForm extends React.Component {
 }
 
 export default connect(
-    (state) => ({isLoggedIn: state.auth.isLoggedIn}),
+    (state) => ({isLoggedIn: state.auth.isLoggedIn, error: state.auth.error}),
     { authenticate }
   )(StartForm);
 

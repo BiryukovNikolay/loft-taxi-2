@@ -3,17 +3,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { logOut } from '../actions';
+import { anauthenticate } from '../actions';
 import Logo from './Logo';
 import { Link } from 'react-router-dom';
-import { store } from '../store';
+import { connect } from 'react-redux';
 
 class Header extends React.Component {
-
-  headerLogout = () => {
-    this.props.logOut();
-    this.props.goToPage('start');
-  }
 
   render () {
     return (
@@ -24,9 +19,9 @@ class Header extends React.Component {
               <Logo />
             </Typography>
             <div>
-              <Button><Link to="/map">Карта</Link></Button>
-              <Button><Link to="/profile">Профиль</Link></Button>
-              <Button><Link onClick={() => store.dispatch(logOut())} to="/">Выйти</Link></Button>
+                <Button><Link to="/map">Карта</Link></Button>
+                <Button><Link to="/profile">Профиль</Link></Button>
+                <Button><Link onClick={() => this.props.anauthenticate()} to="/">Выйти</Link></Button>
             </div>
           </Toolbar>
         </AppBar>
@@ -35,4 +30,7 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default connect(
+  null,
+  { anauthenticate }
+)(Header);

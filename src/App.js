@@ -5,7 +5,7 @@ import Profile from './pages/Profile.jsx';
 import Start from './pages/Start';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';
 import { StartRoute } from './StartRoute';
 

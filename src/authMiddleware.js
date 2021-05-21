@@ -1,15 +1,19 @@
-import { logIn } from './actions';
+import { logOut, logIn, logInError, AUTHENTICATE, ANAUTHENTICATE } from './actions';
 import { serverLogin } from './api';
-import { AUTHENTICATE } from './actions'; 
-
+ 
 export const authMiddleware = (store) => (next) => async (action) => {
     if (action.type === AUTHENTICATE) {
         const {email, password} = action.payload;
-        const success = await serverLogin(email, password);
-        if (success) {
-            console.log('success');
-            store.dispatch(logIn());
+        const data = await serverLogin(email, password);
+        if (data.success) {
+            localStorage.setItem('token', data.token)
+            store.dispatch(logIn(data.token));
+        } else {
+            store.dispatch(logInError(data.error));
         }
+    } else if (action.type === ANAUTHENTICATE) {
+        localStorage.removeItem('token')
+        store.dispatch(logOut())
     } else {
         next(action)
     }

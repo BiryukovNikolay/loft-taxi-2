@@ -1,16 +1,23 @@
-import { LOG_OUT, LOG_IN } from '../actions';
+import { LOG_OUT, LOG_IN, LOG_IN_ERROR } from '../actions';
 
 const initialState = {
-    isLoggedIn: false
+    isLoggedIn: !!localStorage.getItem('token'),
+    token: '',
+    error: '',
 }
  
 export default function(state = initialState, action) {
+    console.log(action.type);
+
     switch(action.type) {
         case LOG_IN: {
-            return {isLoggedIn: true}
+            return {...state, isLoggedIn: true, error: '', token: action.payload}
+        }
+        case LOG_IN_ERROR: {
+            return {...state, isLoggedIn: false, error: action.payload}
         }
         case LOG_OUT: {
-            return {isLoggedIn: false}
+            return {...state, isLoggedIn: false, token: ''}
         }
         default: {
             return state
