@@ -7,9 +7,22 @@ import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { authenticate } from '../actions';
 
-class PaymentForm extends React.Component {
+class PaymentForm extends React.PureComponent {
+    constructor(props) {
+        super(props);
 
-    state = { currentPopup: 'login'}
+        this.state = { 
+            cardNumber: '0000 0000 0000 0000',
+            date: '00/00',
+        }
+
+        this.handleFieldChange = this.handleFieldChange.bind(this);
+    }
+
+    state = { 
+        cardNumber: '0000 0000 0000 0000',
+        date: '00/00',
+    }
 
     onChangeClick = (currentPopup) => {
         this.setState({ currentPopup })
@@ -21,7 +34,13 @@ class PaymentForm extends React.Component {
         this.props.authenticate(email.value, password.value, name.value);
     }
 
+    handleFieldChange(evt) {
+        const {name, value} = evt.target;
+        this.setState({[name]: value});
+    }
+
     render() {
+        const {date, cardNumber} = this.state;
 
         return (
             <div className="payment-form">
@@ -34,10 +53,10 @@ class PaymentForm extends React.Component {
                         <div className="payment-form__inputs">
                             <div className="payment-form__top-wrapper">
                                 <TextField id="name" name="name" label="Имя владельца" />
-                                <TextField id="number" name="number" label="Номер Карты" />
+                                <TextField onChange={this.handleFieldChange} id="cardNumber" name="cardNumber" label="Номер Карты" />
                             </div>
                             <div className="payment-form__bottom-wrapper">
-                                <TextField className="payment-form__data-input" id="date" name="date" label="MM/YY" />
+                                <TextField onChange={this.handleFieldChange} className="payment-form__data-input" id="date" name="date" label="MM/YY" />
                                 <TextField id="CVC" name="CVC" label="CVC" />
                             </div>
                         </div>
@@ -46,13 +65,11 @@ class PaymentForm extends React.Component {
                                 <div className="card-image__header">
                                    <CardLogo />
                                    <div className="card-image__date">
-                                        <span className="card-image__date-month">07</span>
-                                            <span className="card-image__slash">/</span>
-                                        <span className="card-image__date-year">26</span>
+                                        <span className="card-image__slash">{date}</span>
                                     </div>
                                 </div>
                                 <div className="card-image__number">
-                                    <span className="card-image__number-value">0000 0000 0000 0000</span>
+                                    <span className="card-image__number-value">{cardNumber}</span>
                                 </div>
                                 <div className="card-image__footer">
                                     <div className="card-image-chip">

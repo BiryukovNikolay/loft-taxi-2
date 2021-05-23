@@ -1,5 +1,5 @@
-import { logOut, logIn, logInError, AUTHENTICATE, ANAUTHENTICATE } from './actions';
-import { serverLogin } from './api';
+import { logOut, logIn, logInError, savepaymentcard, AUTHENTICATE, ANAUTHENTICATE, SAVE_PAYMENTCARD } from './actions';
+import { serverLogin, serverSaveCard } from './api';
  
 export const authMiddleware = (store) => (next) => async (action) => {
     if (action.type === AUTHENTICATE) {
@@ -14,6 +14,12 @@ export const authMiddleware = (store) => (next) => async (action) => {
     } else if (action.type === ANAUTHENTICATE) {
         localStorage.removeItem('token')
         store.dispatch(logOut())
+    } else if (action.type === SAVE_PAYMENTCARD) {
+        const cardData = action.payload;
+        const isSave = await serverSaveCard(cardData);
+        if (isSave) {
+            store.dispatch(savepaymentcard())
+        }
     } else {
         next(action)
     }
