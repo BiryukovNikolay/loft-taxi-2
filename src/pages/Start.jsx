@@ -2,7 +2,6 @@ import '../style/Start.css';
 import React from 'react';
 import StartLogo from '../components/Startlogo';
 import StartForm from '../components/StartForm';
-import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { authenticate } from '../actions';
 
@@ -24,7 +23,3 @@ export default connect(
   (state) => ({isLoggedIn: state.auth.isLoggedIn}),
   { authenticate }
 )(Start);
-
-Start.propTypes = {
-  //onSubmit: PropTypes.func.isRequired
-}

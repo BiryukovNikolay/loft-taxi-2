@@ -1,0 +1,5 @@
+.profil__section {
+    display: flex;
+    height: 100%;
+    background-image: url(../images/background-map.png);
+}
