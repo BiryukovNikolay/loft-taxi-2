@@ -36,11 +36,10 @@ class StartForm extends React.Component {
         this.setState({ currentPopup })
     }
 
-    submitHandle(evt, callback) { 
+    submitHandle(evt) { 
         evt.preventDefault()
         const {email, password, name} = evt.target;
         this.props.authenticate(email.value, password.value, name.value);
-        // this.props.onSubmit();
     }
 
     render() {

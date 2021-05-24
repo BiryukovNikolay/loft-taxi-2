@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import CardLogo from './CardLogo';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
-import { authenticate } from '../actions';
+import { savepaymentcard } from '../actions';
 
 class PaymentForm extends React.PureComponent {
     constructor(props) {
@@ -19,19 +19,15 @@ class PaymentForm extends React.PureComponent {
         this.handleFieldChange = this.handleFieldChange.bind(this);
     }
 
-    state = { 
-        cardNumber: '0000 0000 0000 0000',
-        date: '00/00',
-    }
-
     onChangeClick = (currentPopup) => {
         this.setState({ currentPopup })
     }
 
-    submitHandle(evt, callback) { 
+    submitHandle(evt) { 
         evt.preventDefault()
-        const {email, password, name} = evt.target;
-        this.props.authenticate(email.value, password.value, name.value);
+        const {name, date, cardNumber, CVC} = evt.target;
+        console.log(this.props.token);
+        this.props.savepaymentcard( cardNumber.value, CVC.value, date.value, name.value, this.props.token );
     }
 
     handleFieldChange(evt) {
@@ -45,7 +41,7 @@ class PaymentForm extends React.PureComponent {
         return (
             <div className="payment-form">
             <h2 className="start-form-title" data-testid='form-title'>Профиль</h2>
-               {<span className="payment-form-description">Ввдеите платежные данные</span>}
+               {<span className="payment-form-description">Введите платежные данные</span>}
                {this.props.error && <span className="error-form">{this.props.error}</span>}
 
                 <form data-testid='start-form' noValidate autoComplete="off" onSubmit={(evt)=> this.submitHandle(evt)}>
@@ -111,8 +107,8 @@ class PaymentForm extends React.PureComponent {
 }
 
 export default connect(
-    (state) => ({isLoggedIn: state.auth.isLoggedIn, error: state.auth.error}),
-    { authenticate }
+    (state) => ({token: state.auth.token}),
+    { savepaymentcard }
   )(PaymentForm);
 
 PaymentForm.propTypes = {

@@ -1,4 +1,12 @@
-import { logOut, logIn, logInError, savepaymentcard, AUTHENTICATE, ANAUTHENTICATE, SAVE_PAYMENTCARD } from './actions';
+import { logOut, 
+         logIn, 
+         logInError, 
+         savecard,
+         errorsavepaymentcard,
+         AUTHENTICATE, 
+         ANAUTHENTICATE, 
+         SAVE_PAYMENTCARD,
+    } from './actions';
 import { serverLogin, serverSaveCard } from './api';
  
 export const authMiddleware = (store) => (next) => async (action) => {
@@ -16,9 +24,13 @@ export const authMiddleware = (store) => (next) => async (action) => {
         store.dispatch(logOut())
     } else if (action.type === SAVE_PAYMENTCARD) {
         const cardData = action.payload;
+        console.log('cardData', cardData);
         const isSave = await serverSaveCard(cardData);
-        if (isSave) {
-            store.dispatch(savepaymentcard())
+        if (isSave.success) {
+            console.log(cardData);
+            store.dispatch(savecard(cardData))
+        } else {
+            store.dispatch(errorsavepaymentcard())
         }
     } else {
         next(action)
