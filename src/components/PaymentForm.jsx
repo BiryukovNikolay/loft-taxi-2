@@ -5,19 +5,9 @@ import Button from '@material-ui/core/Button';
 import CardLogo from './CardLogo';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
-import { savepaymentcard } from '../actions';
+import { savepaymentcard, getpaymentcard } from '../actions/paymentActions';
 
 class PaymentForm extends React.PureComponent {
-    constructor(props) {
-        super(props);
-
-        this.state = { 
-            cardNumber: '0000 0000 0000 0000',
-            date: '00/00',
-        }
-
-        this.handleFieldChange = this.handleFieldChange.bind(this);
-    }
 
     onChangeClick = (currentPopup) => {
         this.setState({ currentPopup })
@@ -26,17 +16,21 @@ class PaymentForm extends React.PureComponent {
     submitHandle(evt) { 
         evt.preventDefault()
         const {name, date, cardNumber, CVC} = evt.target;
-        console.log(this.props.token);
         this.props.savepaymentcard( cardNumber.value, CVC.value, date.value, name.value, this.props.token );
     }
 
-    handleFieldChange(evt) {
+    handleFieldChange = (evt) => {
         const {name, value} = evt.target;
         this.setState({[name]: value});
     }
 
     render() {
-        const {date, cardNumber} = this.state;
+        const {paymentCard, token} = this.props;
+        const {cardNumber, cvc, expiryDate, cardName} = paymentCard;
+
+        if (!cardNumber) {
+            this.props.getpaymentcard(token);
+        }
 
         return (
             <div className="payment-form">
@@ -48,12 +42,12 @@ class PaymentForm extends React.PureComponent {
                     <div className="payment-form__main">
                         <div className="payment-form__inputs">
                             <div className="payment-form__top-wrapper">
-                                <TextField id="name" name="name" label="Имя владельца" />
-                                <TextField onChange={this.handleFieldChange} id="cardNumber" name="cardNumber" label="Номер Карты" />
+                                <TextField value={cardName} id="name" name="cardName" label="Имя владельца" />
+                                <TextField onChange={this.handleFieldChange} value={cardNumber} id="cardNumber" name="cardNumber" label="Номер Карты" />
                             </div>
                             <div className="payment-form__bottom-wrapper">
-                                <TextField onChange={this.handleFieldChange} className="payment-form__data-input" id="date" name="date" label="MM/YY" />
-                                <TextField id="CVC" name="CVC" label="CVC" />
+                                <TextField onChange={this.handleFieldChange} value={expiryDate} className="payment-form__data-input" id="date" name="expiryDate" label="MM/YY" />
+                                <TextField id="CVC" name="cvc" label="CVC" value={cvc} />
                             </div>
                         </div>
                         <div className="payment-form__card">
@@ -61,7 +55,7 @@ class PaymentForm extends React.PureComponent {
                                 <div className="card-image__header">
                                    <CardLogo />
                                    <div className="card-image__date">
-                                        <span className="card-image__slash">{date}</span>
+                                        <span className="card-image__slash">{expiryDate}</span>
                                     </div>
                                 </div>
                                 <div className="card-image__number">
@@ -107,8 +101,8 @@ class PaymentForm extends React.PureComponent {
 }
 
 export default connect(
-    (state) => ({token: state.auth.token}),
-    { savepaymentcard }
+    (state) => ({token: state.auth.token, paymentCard: state.payment.paymentCard}),
+    { savepaymentcard, getpaymentcard }
   )(PaymentForm);
 
 PaymentForm.propTypes = {

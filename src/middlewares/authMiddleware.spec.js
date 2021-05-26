@@ -1,6 +1,6 @@
 import { authMiddleware } from './authMiddleware';
-import { authenticate } from './actions';
-import { serverLogin } from './api';
+import { authenticate } from '../actions/paymentActions';
+import { serverLogin } from '../api';
 
 jest.mock('./api', () => ({serverLogin: jest.fn(() => ({'success': true}))}))
 

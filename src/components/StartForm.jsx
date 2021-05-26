@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
-import { authenticate } from '../actions';
+import { authenticate } from '../actions/authActions';
 
 const startPageData = {
     registration: {

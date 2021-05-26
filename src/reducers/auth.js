@@ -1,4 +1,4 @@
-import { LOG_OUT, LOG_IN, LOG_IN_ERROR } from '../actions';
+import { LOG_OUT, LOG_IN, LOG_IN_ERROR } from '../actions/authActions';
 
 const initialState = {
     isLoggedIn: !!localStorage.getItem('token'),

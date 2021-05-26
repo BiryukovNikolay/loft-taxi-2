@@ -2,8 +2,6 @@ import '../style/Start.css';
 import React from 'react';
 import StartLogo from '../components/Startlogo';
 import StartForm from '../components/StartForm';
-import { connect } from 'react-redux';
-import { authenticate } from '../actions';
 
 class Start extends React.Component {  
     render() {
@@ -19,7 +17,4 @@ class Start extends React.Component {
     };
 }
 
-export default connect(
-  (state) => ({isLoggedIn: state.auth.isLoggedIn}),
-  { authenticate }
-)(Start);
+export default Start;
