@@ -53,3 +53,7 @@
     background-color: #FDBF5A;
     border-radius: 100px;
 }
+
+.error-form {
+    color: red;
+}

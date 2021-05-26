@@ -2,8 +2,9 @@ import '../style/StartForm.css';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { widthAuth } from '../context/AuthContext';
 import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import { authenticate } from '../actions/authActions';
 
 const startPageData = {
     registration: {
@@ -35,11 +36,10 @@ class StartForm extends React.Component {
         this.setState({ currentPopup })
     }
 
-    submitHandle(evt, callback) { 
+    submitHandle(evt) { 
         evt.preventDefault()
         const {email, password, name} = evt.target;
-        this.props.logIn(email.value, password.value, name.value);
-        this.props.onSubmit();
+        this.props.authenticate(email.value, password.value, name.value);
     }
 
     render() {
@@ -51,6 +51,7 @@ class StartForm extends React.Component {
         return (
             <div className="start-form">
             <h2 className="start-form-title" data-testid='form-title'>{title}</h2>
+               {this.props.error && <span className="error-form">{this.props.error}</span>}
             <form data-testid='start-form' noValidate autoComplete="off" onSubmit={(evt)=> this.submitHandle(evt)}>
                 <TextField id="email" name="email" label="Email*" />
                 {nameInput}
@@ -73,9 +74,11 @@ class StartForm extends React.Component {
     }
 }
 
-export default widthAuth(StartForm);
+export default connect(
+    (state) => ({isLoggedIn: state.auth.isLoggedIn, error: state.auth.error}),
+    { authenticate }
+  )(StartForm);
 
 StartForm.propTypes = {
-
     logIn: PropTypes.func,
 }
